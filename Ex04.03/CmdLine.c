@@ -3,25 +3,24 @@
 #include <ctype.h>
 #include "CmdLine.h"
 
-void PrintParameterList(int argc, char *argv[])
+void PrintParameterList(size_t argc, char *argv[])
 {
     printf_s("Parameters: ");
-    for (int i = 0; i < argc; ++i)
-    {
-        printf_s("\t");
-        printf_s("\t%d: %s", i, argv[i]);
+    for (size_t i = 0; i < argc; ++i)
+    {       
+        printf_s("\t%zu: %s", i, argv[i]);
     }
 }
 
-void PrintNumParameters(int argc)
+void PrintNumParameters(size_t argc)
 {
-    printf_s("\nNumber of parameters: %d", argc);
+    printf_s("\nNumber of parameters: %zu", argc);
 }
 
-void PrintNumSwitches(int argc, char *argv[])
+void PrintNumSwitches(size_t argc, char *argv[])
 {
     int counter = 0;
-    for (int i = 0; i < argc; ++i)
+    for (size_t i = 1; i < argc; ++i)
     {
         if (argv[i][0] == '-' || argv[i][0] == '/')
         {
@@ -31,12 +30,12 @@ void PrintNumSwitches(int argc, char *argv[])
     printf_s("\nNumber of switches: %d", counter);
 }
 
-void PrintNumUppercaseAndNumLowercase(int argc, char *argv[])
+void PrintNumUppercaseAndNumLowercase(size_t argc, char *argv[])
 {
     int uppercaseCounter = 0;
     int lowercaseCounter = 0;
     int neitherCaseCounter = 0;
-    for (int i = 0; i < argc; ++i)
+    for (size_t i = 0; i < argc; ++i)
     {
         if (isUppercase(argv[i]))
         {
@@ -58,7 +57,11 @@ void PrintNumUppercaseAndNumLowercase(int argc, char *argv[])
 
 bool isUppercase(char *str)
 {
-    for (int i = 0; i < strlen(str); ++i)
+    if (!containsLetters(str))
+    {
+        return false;
+    }
+    for (size_t i = 0; i < strlen(str); ++i)
     {
         if (islower(*(str + i)))
         {
@@ -70,8 +73,11 @@ bool isUppercase(char *str)
 
 bool isLowercase(char *str)
 {
-
-    for (int i = 0; i < strlen(str); ++i)
+    if (!containsLetters(str))
+    {
+        return false;
+    }
+    for (size_t i = 0; i < strlen(str); ++i)
     {
         if (isupper(*(str + i)))
         {
@@ -79,4 +85,17 @@ bool isLowercase(char *str)
         }
     }
     return true;
+}
+
+bool containsLetters(char *str)
+{
+    for (size_t i = 0; i < strlen(str); ++i)
+    {
+        int asciiValue = (int)*(str + i);
+        if ((asciiValue >= 65 && asciiValue <= 90) || (asciiValue >= 97 && asciiValue <= 122))
+        {
+            return true;
+        }
+    }
+    return false;
 }

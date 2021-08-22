@@ -1,7 +1,6 @@
-#include <stdio.h>
 #include "CmdLine.h"
 
-int main(int argc, char *argv[])
+int main(size_t argc, char *argv[])
 {
     PrintParameterList(argc, argv);
     PrintNumParameters(argc);
