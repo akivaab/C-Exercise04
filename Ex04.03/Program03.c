@@ -6,4 +6,6 @@ int main(size_t argc, char *argv[])
     PrintNumParameters(argc);
     PrintNumSwitches(argc, argv);
     PrintNumUppercaseAndNumLowercase(argc, argv);
+
+    return 0;
 }
