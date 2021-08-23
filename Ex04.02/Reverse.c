@@ -22,6 +22,7 @@ void PrintReverse(const char *str)
             printf_s("%c", ' ');
         }
     }
+
     for (size_t i = 0; i < endIndex; ++i)
     {
         printf_s("%c", *(str + i));
